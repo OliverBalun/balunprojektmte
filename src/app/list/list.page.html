@@ -10,6 +10,32 @@
 </ion-header>
 
 <ion-content>
+    <ion-input [(ngModel)]="userInput" placeholder="Hledej podle názvu týmu..."></ion-input>
+    <ion-button (click)="btnSportClicked()" expand="block" > Hledej </ion-button>
+
+  <!--  <ion-list>
+        <ion-item >
+          
+        <ion-icon [name]="item.icon" slot="start"></ion-icon>
+        <p>Premier League</p>
+        <div class="item-note" slot="end">
+        <p>anglie</p>
+        </div>
+        </ion-item>
+        <ion-item >
+            <p>Bundesliga</p>
+        </ion-item>
+        <ion-item >
+            <p>Serie A</p>
+        </ion-item>
+        <ion-item >
+            <p>French Ligue 1</p>
+        </ion-item>
+        <ion-item >
+            <p>La Liga</p>
+        </ion-item>
+    </ion-list>
+  -->
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-icon [name]="item.icon" slot="start"></ion-icon>
