@@ -1,5 +1,7 @@
 {
   "name": "balunprojektmte",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
