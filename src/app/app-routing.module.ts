@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'ligazapasy',
+    loadChildren: () => import('./ligazapasy/ligazapasy.module').then( m => m.LigazapasyPageModule)
   }
 ];
 

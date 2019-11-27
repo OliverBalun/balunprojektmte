@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StahnisportService } from '../service/stahnisport.service';
 import { StahnitymprogramService } from '../service/stahnitymprogram.service';
 import { LoadingController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
+import { Navigation } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-list',
@@ -38,12 +40,12 @@ export class ListPage implements OnInit {
   ];
   public items: Array<{ title: string; note: string; icon: string }> = [];
   constructor(private stahnisportService: StahnisportService,private stahnitymprogramService: StahnitymprogramService,
-              public loadingController: LoadingController,) 
+              public loadingController: LoadingController,private router:Router) 
     {
     for (let i = 0; i < 5; i++) {
       this.items.push({
         title: this.ligy[i],
-        note: 'This is liga id #' + this.idsligy[i],
+        note: this.idsligy[i],
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
@@ -56,6 +58,21 @@ export class ListPage implements OnInit {
   //   this.router.navigate(['/list', JSON.stringify(item)]);
   // }
 
+  onLigaClick(idligy:any){
+    console.log('posilam id ligy');    
+    console.log(idligy);    
+      //console.log(this.teamID);
+      let navigationExtras:NavigationExtras= {
+        state:{
+          user: idligy
+        }
+      };
+      this.router.navigate(['ligazapasy'], navigationExtras);
+  }
+
+
+  //OB API https://www.thesportsdb.com/api.php
+  
   btnSportClicked(){
     console.log(this.userInput);
     {
