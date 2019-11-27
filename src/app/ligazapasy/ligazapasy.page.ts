@@ -29,7 +29,11 @@ export class LigazapasyPage implements OnInit {
   ngOnInit() {
     console.log("proklik");
     console.log(this.ideligy);
+    if (this.ideligy.length<5){
     this.loadDataLigy();
+    }else{
+      this.stahniSportResult=this.ideligy["events"];
+    }
   }
 
   onZapasClick(idzapas:any){

@@ -10,7 +10,10 @@
 </ion-header>
 
 <ion-content>
-    <ion-input [(ngModel)]="userInput" placeholder="Hledej podle názvu týmu..."></ion-input>
+
+    <ion-input [(ngModel)]="userInput" placeholder="Hledej podle názvu týmu...">
+        <ion-icon name="search" slot="start"></ion-icon>
+    </ion-input>
     <ion-button (click)="btnSportClicked()" expand="block" > Hledej </ion-button>
 
   <!--  <ion-list>

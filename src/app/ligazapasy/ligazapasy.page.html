@@ -5,7 +5,7 @@
         <ion-back-button></ion-back-button>
       </ion-buttons>
       <ion-title>
-        Příští zápasy ligy
+        Příští zápasy
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -15,9 +15,9 @@
     <ion-list>
         <ion-item-sliding *ngFor="let item of stahniSportResult">
         <ion-item button (click)='onZapasClick(item.idEvent)' >
-          <ion-icon [name]="football" slot="start"></ion-icon>
+          <ion-icon name="football" slot="start"></ion-icon>
           {{item.strEvent}} 
-          <div slot="end">{{item.strDate}}</div> 
+          <div slot="end">{{item.dateEvent}}</div> 
         </ion-item>
       </ion-item-sliding>
       </ion-list>
