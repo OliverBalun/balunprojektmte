@@ -1,9 +1,25 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Ligové zápasy</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Příští zápasy ligy
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let item of stahniSportResult">
+        <ion-item button (click)='onZapasClick(item.idEvent)' >
+          <ion-icon [name]="football" slot="start"></ion-icon>
+          {{item.strEvent}} 
+          <div slot="end">{{item.strDate}}</div> 
+        </ion-item>
+      </ion-item-sliding>
+      </ion-list>
 
 </ion-content>

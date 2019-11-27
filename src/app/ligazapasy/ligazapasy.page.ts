@@ -32,6 +32,18 @@ export class LigazapasyPage implements OnInit {
     this.loadDataLigy();
   }
 
+  onZapasClick(idzapas:any){
+    console.log('posilam id zapasu');    
+    console.log(idzapas);    
+     /* //console.log(this.teamID);
+      let navigationExtras:NavigationExtras= {
+        state:{
+          user: idzapas
+        }
+      };
+      this.router.navigate(['ligazapasy'], navigationExtras);*/
+  }
+
   loadDataLigy(){
     console.log(this.ideligy);
     {
@@ -41,10 +53,10 @@ export class LigazapasyPage implements OnInit {
       this.stahnisportService.getLigaEvents(this.ideligy).subscribe( (response) => {
         //response from server is back, jdeme zpracovat odpoved
         console.log(response);
-        //this.stahniSportResult=response["teams"];
+        this.stahniSportResult=response["events"];
         //hide loading dialog
         //this.teamID=response["teams"]["0"]["idTeam"];
-        //console.log(response["teams"]["0"]["idTeam"]);
+        console.log(response["events"]);
         this.loading.dismiss();
       } );
 
