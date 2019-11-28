@@ -11,4 +11,15 @@
 
 <ion-content>
   <p>SISEL - Super Intend Sport Event List aplikace</p>
+  <ng-container *ngIf="loadzdb != null">
+      <ng-container *ngFor="let item of loadzdb; let i=index;">
+      <ion-item >
+      {{item.name}} <br> 
+      {{item.date}} od: {{item.time}}
+      </ion-item>
+    </ng-container>
+  </ng-container>
+
+
+
 </ion-content>

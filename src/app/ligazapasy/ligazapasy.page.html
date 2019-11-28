@@ -14,7 +14,7 @@
 
     <ion-list>
         <ion-item-sliding *ngFor="let item of stahniSportResult">
-        <ion-item button (click)='onZapasClick(item.idEvent)' >
+        <ion-item button (click)='onZapasClick(item.idEvent,item.dateEvent,item.strTime,item.strEvent)' >
           <ion-icon name="football" slot="start"></ion-icon>
           {{item.strEvent}} 
           <div slot="end">{{item.dateEvent}}</div> 

@@ -17,7 +17,7 @@ export class ListPage implements OnInit {
   private stahniSportResult:any
   private stahniTymprogramResult:any
   private loading:any= this.loadingController.create({
-    message: 'Čekám na získání rozvrhu...',
+    message: 'Čekám na získání dat...',
   });
 
   private selectedItem: any;
