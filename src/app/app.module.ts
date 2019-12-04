@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { Calendar } from '@ionic-native/calendar';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 import { IonicStorageModule } from '@ionic/storage';
 

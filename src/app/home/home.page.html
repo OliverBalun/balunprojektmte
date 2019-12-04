@@ -9,14 +9,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <p>SISEL - Super Intend Sport Event List aplikace</p>
+<ion-content padding class="background">
+  <ion-title class="nadpis" size="large">SPORT EVENT PLANNING APP</ion-title>
+
   <ng-container *ngIf="loadzdb != null">
-      <ng-container *ngFor="let item of loadzdb; let i=index;">
-      <ion-item >
-      {{item.name}} <br> 
-      {{item.date}} od: {{item.time}}
-      </ion-item>
+      <ion-list-header>
+          <ion-label class="podnadpis">Poslední 4 planované zápasy</ion-label>
+      </ion-list-header>
+      <ng-container *ngFor="let item of (loadzdb | slice:loadzdb.length - 4); let i=index;">
+        <!--ng-container *ngIf="(Date | date:'yyyy-MM-dd') == (item.date | date:'yyyy-MM-dd')"-->
+        <ion-item >
+        {{item.name}} <br> 
+        {{item.date}} od: {{item.time}}
+        </ion-item>
+      <!--/ng-container-->
     </ng-container>
   </ng-container>
 
