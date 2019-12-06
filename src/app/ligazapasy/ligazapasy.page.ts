@@ -3,7 +3,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { Navigation } from 'selenium-webdriver';
 import { StahnisportService } from '../service/stahnisport.service';
 import { StahnitymprogramService } from '../service/stahnitymprogram.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 interface zapasInterface {
@@ -31,12 +31,38 @@ export class LigazapasyPage implements OnInit {
   });
 
   constructor(private stahnisportService: StahnisportService,private stahnitymprogramService: StahnitymprogramService,
-    public loadingController: LoadingController,private router:Router,private route:ActivatedRoute,private storage: Storage) { 
+    public loadingController: LoadingController,private router:Router,private route:ActivatedRoute,private storage: Storage,
+    public alertController:AlertController) { 
     this.route.queryParams.subscribe(params=>{
       if (this.router.getCurrentNavigation().extras.state){
         this.ideligy=this.router.getCurrentNavigation().extras.state.user;
       }
     });
+  }
+
+  async presentAlert(idzapas:any,dateev:any,timeev:any,nameev:any) {
+    const alert = await this.alertController.create({
+      header: nameev,
+      subHeader: timeev,
+      message: dateev,
+      buttons: [
+        {
+          text: 'Add event',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Ted zapis do kalendare');
+            this.onZapasClick(idzapas,dateev,timeev,nameev);
+          }
+        }, {
+          text: 'OK',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+    console.log(idzapas,dateev,timeev,nameev); 
+    await alert.present();
   }
 
   ngOnInit() {
@@ -129,6 +155,25 @@ export class LigazapasyPage implements OnInit {
       }
       this.loading.dismiss();
     }); 
+
+    /*this.polezapasu.push(idzapas);
+    console.log('vypisuju pole po pushi');
+    console.log(this.polezapasu); 
+    this.storage.set('idzapasu', (this.polezapasu)); */
+     /* //console.log(this.teamID);
+      let navigationExtras:NavigationExtras= {
+        state:{
+          user: idzapas
+        }
+      };
+      this.router.navigate(['ligazapasy'], navigationExtras);*/
+  }
+
+  onInfoClick(idzapas:any,dateev:any,timeev:any,nameev:any){
+    console.log('posilam info o zapasu');    
+    console.log(idzapas,dateev,timeev,nameev);  
+    console.log('vypisuju vsechny zapasy');      
+    console.log(this.stahniSportResult);
 
 
     /*this.polezapasu.push(idzapas);

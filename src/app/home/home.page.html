@@ -9,19 +9,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="background">
+<ion-content class="background">
   <ion-title class="nadpis" size="large">SPORT EVENT PLANNING APP</ion-title>
 
   <ng-container *ngIf="loadzdb != null">
       <ion-list-header>
           <ion-label class="podnadpis">Poslední 4 planované zápasy</ion-label>
       </ion-list-header>
+      <ng-container *ngIf="vicjak4">
       <ng-container *ngFor="let item of (loadzdb | slice:loadzdb.length - 4); let i=index;">
         <!--ng-container *ngIf="(Date | date:'yyyy-MM-dd') == (item.date | date:'yyyy-MM-dd')"-->
         <ion-item >
         {{item.name}} <br> 
         {{item.date}} od: {{item.time}}
         </ion-item>
+      </ng-container>
+      <!--/ng-container-->
+    </ng-container>
+    <ng-container *ngIf="vicjak4===false">
+      <ng-container *ngFor="let item of loadzdb; let i=index;">
+        <!--ng-container *ngIf="(Date | date:'yyyy-MM-dd') == (item.date | date:'yyyy-MM-dd')"-->
+        <ion-item >
+        {{item.name}} <br> 
+        {{item.date}} od: {{item.time}}
+        </ion-item>
+      </ng-container>
       <!--/ng-container-->
     </ng-container>
   </ng-container>
