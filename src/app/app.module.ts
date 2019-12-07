@@ -11,9 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { Calendar } from '@ionic-native/calendar/ngx';
-
 import { IonicStorageModule } from '@ionic/storage';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +27,8 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Calendar
   ],
   bootstrap: [AppComponent]
 })

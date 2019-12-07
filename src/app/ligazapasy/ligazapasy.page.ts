@@ -3,7 +3,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { Navigation } from 'selenium-webdriver';
 import { StahnisportService } from '../service/stahnisport.service';
 import { StahnitymprogramService } from '../service/stahnitymprogram.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 interface zapasInterface {
@@ -25,14 +25,15 @@ interface zapasyInterface {
 export class LigazapasyPage implements OnInit {
   ideligy:any;
   public polezapasu: zapasyInterface = { zapasy : [] } ;
-  private stahniSportResult:any
+  private stahniSportResult:any;
+  Calendar:any;
   private loading:any= this.loadingController.create({
-    message: 'Čekám na získání rozvrhu...',
+    message: 'Čekám na získání rozpisu...',
   });
 
   constructor(private stahnisportService: StahnisportService,private stahnitymprogramService: StahnitymprogramService,
     public loadingController: LoadingController,private router:Router,private route:ActivatedRoute,private storage: Storage,
-    public alertController:AlertController) { 
+    public alertController:AlertController, public platform:Platform) { 
     this.route.queryParams.subscribe(params=>{
       if (this.router.getCurrentNavigation().extras.state){
         this.ideligy=this.router.getCurrentNavigation().extras.state.user;
@@ -155,6 +156,30 @@ export class LigazapasyPage implements OnInit {
       }
       this.loading.dismiss();
     }); 
+
+    //PRIDEJ UDALOST DO KALENDARE V ZARIZENI
+    var startDate = new Date(2019,2,15,18,30,0,0); // beware: month 0 = january, 11 = december
+    var endDate = new Date(2019,2,15,19,30,0,0);
+    var title = "My nice event";
+    var eventLocation = "Home";
+    var notes = "Some notes about this event.";
+    var success = function(message) { alert("Success: " + JSON.stringify(message)); };
+    var error = function(message) { alert("Error: " + message); };
+    var options = window.plugins.calendar.getCalendarOptions();
+    console.log("tady");
+    console.log(options);
+    window.plugins.calendar.listCalendars(function(res1) {
+    options.calendarId = res1[0].id;
+    this.platform.ready().then(() => {
+      //this.calendar.createEvent(title,eventLocation,notes,startDate,endDate); 
+        window.plugins.calendar.createEvent(title,eventLocation,notes,startDate,endDate,success,error); 
+    });
+    //window.plugins.calendar.createEventWithOptions(title, loc, notes, start, end, options, success, error);
+    }, function(res1) {
+    alert('error : ' + res1);
+    });
+    
+    
 
     /*this.polezapasu.push(idzapas);
     console.log('vypisuju pole po pushi');
