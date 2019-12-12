@@ -5,6 +5,7 @@ import { StahnisportService } from '../service/stahnisport.service';
 import { StahnitymprogramService } from '../service/stahnitymprogram.service';
 import { LoadingController, AlertController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 interface zapasInterface {
   id : String
@@ -26,19 +27,24 @@ export class LigazapasyPage implements OnInit {
   ideligy:any;
   public polezapasu: zapasyInterface = { zapasy : [] } ;
   private stahniSportResult:any;
-  Calendar:any;
+  calendars= [];
   private loading:any= this.loadingController.create({
     message: 'Čekám na získání rozpisu...',
   });
 
   constructor(private stahnisportService: StahnisportService,private stahnitymprogramService: StahnitymprogramService,
     public loadingController: LoadingController,private router:Router,private route:ActivatedRoute,private storage: Storage,
-    public alertController:AlertController, public platform:Platform) { 
+    public alertController:AlertController, public platform:Platform, private calendar:Calendar) { 
     this.route.queryParams.subscribe(params=>{
       if (this.router.getCurrentNavigation().extras.state){
         this.ideligy=this.router.getCurrentNavigation().extras.state.user;
       }
     });
+    this.platform.ready().then(()=>{
+      this.calendar.listCalendars().then(data=>{
+        this.calendars=data;
+      });
+    })
   }
 
   async presentAlert(idzapas:any,dateev:any,timeev:any,nameev:any) {
@@ -172,6 +178,15 @@ export class LigazapasyPage implements OnInit {
     console.log(startDate+" + "+endDate);
     var success = function(message) { alert("Success: " + JSON.stringify(message)); };
     var error = function(message) { alert("Error: " + message); };
+
+    let date = new Date();
+    let options = this.calendars[0].getCalendarOptions();
+
+    this.calendar.createEvent(title,eventLocation,notes,startDate,endDate).then(res=> {
+    }, err=>{
+      console.log('err: ',err);
+    });
+    /*
     var options = window.plugins.calendar.getCalendarOptions();
     console.log("tady");
     console.log(options);
@@ -185,7 +200,7 @@ export class LigazapasyPage implements OnInit {
     }, function(res1) {
     alert('error : ' + res1);
     });
-    
+    */
     
 
     /*this.polezapasu.push(idzapas);
