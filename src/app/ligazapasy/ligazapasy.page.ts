@@ -157,12 +157,19 @@ export class LigazapasyPage implements OnInit {
       this.loading.dismiss();
     }); 
 
-    //PRIDEJ UDALOST DO KALENDARE V ZARIZENI
-    var startDate = new Date(2019,2,15,18,30,0,0); // beware: month 0 = january, 11 = december
-    var endDate = new Date(2019,2,15,19,30,0,0);
-    var title = "My nice event";
+    //PRIDEJ UDALOST DO KALENDARE V ZARIZENI date: 2019-12-14 time 17:30:00
+    console.log(nameev);
+    console.log(dateev.substring(0,4)+"+ "+dateev.substring(5,7)+"+ "+dateev.substring(8));
+    console.log(timeev.substring(0,2)+"+ "+timeev.substring(3,5)+"+ "+timeev.substring(6));
+    console.log("konvert  srt2int: "+parseInt(timeev.substring(0,2)));
+    //var startDate = new Date(2019,2,15,18,30,0,0); // beware: month 0 = january, 11 = december
+    //var endDate = new Date(2019,2,15,19,30,0,0);
+    var startDate = new Date(parseInt(dateev.substring(0,4)),parseInt(dateev.substring(5,7))-1,parseInt(dateev.substring(8)),parseInt(timeev.substring(0,2)),parseInt(timeev.substring(3,5)),0,0); // beware: month 0 = january, 11 = december
+    var endDate = new Date(parseInt(dateev.substring(0,4)),parseInt(dateev.substring(5,7))-1,parseInt(dateev.substring(8)),parseInt(timeev.substring(0,2))+1,parseInt(timeev.substring(3,5)),0,0);
+    var title = nameev;
     var eventLocation = "Home";
-    var notes = "Some notes about this event.";
+    var notes = nameev;
+    console.log(startDate+" + "+endDate);
     var success = function(message) { alert("Success: " + JSON.stringify(message)); };
     var error = function(message) { alert("Error: " + message); };
     var options = window.plugins.calendar.getCalendarOptions();
