@@ -27,7 +27,7 @@ export class LigazapasyPage implements OnInit {
   ideligy:any;
   public polezapasu: zapasyInterface = { zapasy : [] } ;
   private stahniSportResult:any;
-  calendars= [];
+  calendars:any= [];
   private loading:any= this.loadingController.create({
     message: 'Čekám na získání rozpisu...',
   });
@@ -72,6 +72,7 @@ export class LigazapasyPage implements OnInit {
     await alert.present();
   }
 
+  
   ngOnInit() {
     console.log("proklik");
     console.log(this.ideligy);
@@ -180,12 +181,17 @@ export class LigazapasyPage implements OnInit {
     var error = function(message) { alert("Error: " + message); };
 
     let date = new Date();
-    let options = this.calendars[0].getCalendarOptions();
-
-    this.calendar.createEvent(title,eventLocation,notes,startDate,endDate).then(res=> {
+    //let options = this.calendars[0].getCalendarOptions();
+    let options = { calendarId: 0, calendarName: this.calendars[0].name, url: 'https://ionicacademy.com', firstReminderMinutes: 15 };
+    //options.calendarId=this.calendars[0].id;
+    //options.calendarName=this.calendars[0].name;
+    this.calendar.createEventInteractivelyWithOptions(title, eventLocation, notes, startDate, endDate, options);
+    /*this.calendar.createEvent(title,eventLocation,notes,startDate,endDate).then(res=> {
     }, err=>{
       console.log('err: ',err);
     });
+    */
+
     /*
     var options = window.plugins.calendar.getCalendarOptions();
     console.log("tady");
